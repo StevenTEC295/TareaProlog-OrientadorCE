@@ -3,9 +3,11 @@
 % Oracion
 oracion(Num,Gen,S0,S):- sn(Num,Gen,S0,S1), sv(Num,S1,S).
 oracion(Num,Gen,S0,S):- sn(Num,Gen,S0,S1), sv(Num,Gen,S1,S).
+oracion(Num,Gen,Per,S0,S):- sn(Num,Gen,Per,S0,S1), sv(Num,Gen,S1,S).
 
 % Sintagma Nominal (SN)
 sn(Num,Gen,S0,S):-det(Num,Gen,S0,S1), nom(Num,Gen,S1,S).
+sn(Num,Gen,Per,S0,S):-pronombre(Num, Gen, Per, S0,S).
 
 %Sintagma preposicional
 sprep(Num,Gen,S0,S):-prep(S0,S1), sn(Num,Gen,S1,S).
@@ -23,6 +25,9 @@ verbo(Num, [X|S],S):- verbos(Num,X).
 
 %Preposicion
 prep([X|S],S):- preposicion(X).
+
+%Pronombre
+pronombre(Num,Gen,Per,[X|S],S):- pronombres(Num,Gen, Per, X).
 
 
 

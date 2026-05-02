@@ -182,6 +182,14 @@ articulo(sing, fem, una).
 articulo(plur, masc, unos).
 articulo(plur, fem, unas).
 
+%pronombre
+pronombres(sing,_,primera,yo).
+pronombres(plur,_,primera,nosotros).
+pronombres(plur,_,primera,nosotras).
+pronombres(sing,_,segunda,tu).
+pronombres(plur,_,segunda,ustedes).
+
+
 %sustantivos
 sustantivos(sing, masc,hombre).
 sustantivos(sing, fem,mujer).
