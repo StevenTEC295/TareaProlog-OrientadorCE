@@ -170,42 +170,78 @@ antagonia(trabajo_social, poca_empatia).
 
 
 %articulos definidos
-articulo(sing, masc,el).
-articulo(sing, fem,la).
-articulo(plur, masc,los).
-articulo(plur, fem,las).
+articulo(sing, masc,_,el).
+articulo(sing, fem,_,la).
+articulo(plur, masc,_,los).
+articulo(plur, fem,_,las).
 
 
 %articulos indefinidos
-articulo(sing, masc, un).
-articulo(sing, fem, una).
-articulo(plur, masc, unos).
-articulo(plur, fem, unas).
+articulo(sing, masc,_, un).
+articulo(sing, fem,_,una).
+articulo(plur, masc,_, unos).
+articulo(plur, fem,_,unas).
+
+%Adjetivos demostrativos
+adj_dem(sing,_,_,esto).
+adj_dem(sing,_,_,eso).
+adj_dem(sing,_,_,aquello).
+
+adj_dem(sing,masc,_,este).
+adj_dem(sing,masc,_,ese).
+adj_dem(sing,masc,_,aquel).
+
+adj_dem(sing,fem,_,esta).
+adj_dem(sing,fem,_,esa).
+adj_dem(sing,fem,_,aquella).
+
+adj_dem(plur,masc,_,estos).
+adj_dem(plur,masc,_,esos).
+adj_dem(plur,masc,_,aquello).
+
+adj_dem(plur,fem,_,estas).
+adj_dem(plur,fem,_,esas).
+adj_dem(plur,fem,_,aquellas).
+
+%Adjetivos posesivos
+adj_pos(sing,_,_,mi).
+adj_pos(sing,_,_,tu).
+adj_pos(sing,_,_,su).
 
 %pronombre
 pronombres(sing,_,primera,yo).
 pronombres(plur,_,primera,nosotros).
 pronombres(plur,_,primera,nosotras).
 pronombres(sing,_,segunda,tu).
+pronombres(sing,_,segunda,usted).
 pronombres(plur,_,segunda,ustedes).
+pronombres(sing,masc,tercera,el).
+pronombres(sing,fem,tercera,ella).
+pronombres(plur,masc,tercera,ellos).
+pronombres(plur,fem,tercera,ellas).
 
 
 %sustantivos
 sustantivos(sing, masc,hombre).
-sustantivos(sing, fem,mujer).
-sustantivos(plur, masc,libros).
-sustantivos(sing, fem, manzana).
+sustantivos(sing, fem, mujer).
+
 
 %Verbos
-verbos(sing,estudiar).
-verbos(sing,estudiaria).
-verbos(sing,estudio).
 verbos(sing,gustar).
 verbos(sing,gustaria).
 verbos(sing,gusta).
 verbos(sing,disfrutar).
 verbos(sing,disfrutaria).
 verbos(sing,disfruto).
+verbos(sing,encantar).
+verbos(sing,encantaria).
+verbos(sing,encanta).
+verbos(sing,odiar).
+verbos(sing,odiaria).
+verbos(sing,odio).
+verbos(sing,estudiar).
+verbos(sing,estudiaria).
+verbos(sing,estudio).
 verbos(sing,hablar).
 verbos(sing,hablaria).
 verbos(sing,hablo).
