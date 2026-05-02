@@ -220,11 +220,45 @@ pronombres(sing,fem,tercera,ella).
 pronombres(plur,masc,tercera,ellos).
 pronombres(plur,fem,tercera,ellas).
 
+%cuantificadores
+cuantificadores(sing, _,bastante).
+cuantificadores(plur, _,bastantes).
+cuantificadores(sing, _,cualquier).
+cuantificadores(plur, _,cualesquiera).
+
+cuantificadores(sing, masc,algun).
+cuantificadores(plur, masc,algunos).
+cuantificadores(sing, masc,mucho).
+cuantificadores(plur, masc,muchos).
+cuantificadores(sing, masc,demasiado).
+cuantificadores(plur, masc,demasiados).
+cuantificadores(sing, masc,poco).
+cuantificadores(plur, masc,pocos).
+cuantificadores(sing, masc,todo).
+cuantificadores(plur, masc,todos).
+cuantificadores(sing, masc,otro).
+cuantificadores(plur, masc,otros).
+
+cuantificadores(sing, fem,alguna).
+cuantificadores(plur, fem,algunas).
+cuantificadores(sing, fem,mucha).
+cuantificadores(plur, fem,muchas).
+cuantificadores(sing, fem,demasiada).
+cuantificadores(plur, fem,demasiadas).
+cuantificadores(sing, fem,poca).
+cuantificadores(plur, fem,pocas).
+cuantificadores(sing, fem,toda).
+cuantificadores(plur, fem,todas).
+cuantificadores(sing, fem,otra).
+cuantificadores(plur, fem,otras).
+
+%Intensificadores
+
 
 %sustantivos
-sustantivos(sing, masc,hombre).
-sustantivos(sing, fem, mujer).
-
+sustantivos(sing, masc, tercera,hombre).
+sustantivos(sing, fem, tercera,mujer).
+sustantivos(sing, fem, tercera,biologia).
 
 %Verbos
 verbos(sing,gustar).
