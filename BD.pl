@@ -167,3 +167,50 @@ antagonia(trabajo_social, trabajo_autonomo).
 antagonia(trabajo_social, matematicas).
 antagonia(trabajo_social, tecnologia).
 antagonia(trabajo_social, poca_empatia).
+
+
+%articulos definidos
+articulo(sing, masc,el).
+articulo(sing, fem,la).
+articulo(plur, masc,los).
+articulo(plur, fem,las).
+
+
+%articulos indefinidos
+articulo(sing, masc, un).
+articulo(sing, fem, una).
+articulo(plur, masc, unos).
+articulo(plur, fem, unas).
+
+%sustantivos
+sustantivos(sing, masc,hombre).
+sustantivos(sing, fem,mujer).
+sustantivos(plur, masc,libros).
+sustantivos(sing, fem, manzana).
+
+%Verbos
+verbos(sing,estudiar).
+verbos(sing,estudiaria).
+verbos(sing,estudio).
+verbos(sing,gustar).
+verbos(sing,gustaria).
+verbos(sing,gusta).
+verbos(sing,disfrutar).
+verbos(sing,disfrutaria).
+verbos(sing,disfruto).
+verbos(sing,hablar).
+verbos(sing,hablaria).
+verbos(sing,hablo).
+verbos(sing,ser).
+verbos(sing,sere).
+verbos(sing,soy).
+
+%Preposiciones 
+preposicion(a).
+preposicion(en).
+preposicion(con).
+preposicion(de).
+preposicion(por).
+preposicion(para).
+
+
