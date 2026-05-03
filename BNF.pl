@@ -1,67 +1,83 @@
 % ARCHIVO: BNF.pl (Parser Interpretativo - Cumplimiento Estricto)
 
-% analizar_oracion se encarga de consumir la lista de palabras y devolver una intencion (afirmativo o negativo) segun el patron que encuentre, con prioridad a lo negativo. Si encuentra un "no" o verbo negativo, se asume negativo, incluso si hay palabras positivas despues. Si no encuentra nada negativo, se asume afirmativo si encuentra palabras positivas o afirmaciones. Si no encuentra nada, falla y se vuelve a preguntar.
 analizar_oracion(ListaPalabras, Intencion) :-
-    % once se asegura de que solo se tome la primera coincidencia encontrada, evitando ambigüedades y garantizando una respuesta clara.
+    % once/1 asegura obtener solo el primer resultado válido, evitando ambigüedades.
     once(phrase(oracion(Intencion), ListaPalabras)).
 
 
-% La estructura de la oración se define dividiéndola en un sintagma nominal (el sujeto o la basura inicial) y un sintagma verbal (donde está el verbo/núcleo y la intención principal). Esto cumple con la rúbrica estricta del proyecto.
-oracion(Intencion) --> sintagma_nominal, sintagma_verbal(Intencion).
+% reglas de la oraciones 
 
-% El sintagma nominal se encarga de absorber el sujeto (como "yo", "a mi") o simplemente actuar como relleno inicial si el usuario usa un sujeto tácito.
-sintagma_nominal --> relleno, pronombre.
-sintagma_nominal --> relleno. 
+oracion(afirmativo) --> sintagma_nominal, sintagma_verbal(afirmativo). % Sujeto seguido de acción positiva.
+oracion(afirmativo) --> afirmacion, sintagma_nominal, sintagma_verbal(afirmativo). % Ej: "sí, el juego me gusta"
+oracion(afirmativo) --> sintagma_verbal(afirmativo). % Sujeto tácito (ej: "me gusta")
+oracion(afirmativo) --> afirmacion, sintagma_verbal(afirmativo). 
 
-% El sintagma verbal es el corazón de la oración. Contiene el núcleo (donde se extrae la intención afirmativa o negativa) y permite que el parser ignore cualquier palabra irrelevante o predicado que venga después usando otro relleno final.
-sintagma_verbal(Intencion) --> nucleo(Intencion), relleno.
+oracion(negativo) --> sintagma_nominal, sintagma_verbal(negativo). % Sujeto seguido de acción negativa.
+oracion(negativo) --> negacion, sintagma_nominal, sintagma_verbal(_). % La negación inicial invierte el sentido del verbo.
+oracion(negativo) --> afirmacion, sintagma_nominal, sintagma_verbal(negativo).
+oracion(negativo) --> sintagma_verbal(negativo).
+oracion(negativo) --> negacion, sintagma_verbal(_).
 
-
-% El relleno es una secuencia de palabras que no afectan la intención principal de la respuesta. Puede ser cualquier palabra o conjunto de palabras, incluyendo ninguna (lista vacía). Esto permite que el parser sea flexible y pueda manejar respuestas con diferentes estructuras y niveles de detalle, sin perder la capacidad de identificar la intención principal.
-relleno --> [].
-relleno --> [_], relleno.
-
-% Pronombres comunes que el usuario podría usar al inicio de la oración.
-pronombre --> [yo] | [me] | [a, mi] | [nosotros].
+% sintagmas
 
 
-% extraer la intencion de la respuesta, con prioridad a lo negativo (si hay un "no" o verbo negativo, se asume negativo)
-nucleo(negativo) --> frase_indirecta_negativa.
-nucleo(negativo) --> pivot, relleno. 
-nucleo(negativo) --> verbo_negativo.
-nucleo(negativo) --> negacion, relleno, verbo_positivo. 
-nucleo(negativo) --> negacion, relleno, frase_indirecta_positiva. 
-nucleo(negativo) --> negacion.
+sintagma_nominal --> pronombre. % Un sujeto puede ser solo un pronombre (ej: "yo").
+sintagma_nominal --> pronombre_objeto.
+sintagma_nominal --> determinante, sustantivo.
+sintagma_nominal --> determinante, sustantivo, adjetivo.
 
-nucleo(afirmativo) --> frase_indirecta_positiva.
-nucleo(afirmativo) --> verbo_positivo.
-nucleo(afirmativo) --> afirmacion.
+sintagma_verbal(afirmativo) --> verbo_positivo. % Acción directa (ej: "prefiero").
+sintagma_verbal(afirmativo) --> verbo_positivo, complemento.
+sintagma_verbal(afirmativo) --> pronombre_objeto, verbo_positivo. % (ej: "me defiendo")
+sintagma_verbal(afirmativo) --> pronombre_objeto, verbo_positivo, complemento. % (ej: "me llama la atencion")
+sintagma_verbal(afirmativo) --> pronombre_objeto, verbo_positivo, preposicion. % (ej: "me inclino por")
+sintagma_verbal(afirmativo) --> verbo_modal, verbo_infinitivo. % (ej: "puede ser")
+sintagma_verbal(afirmativo) --> verbo_positivo, adverbio, preposicion. % (ej: "soy mas de")
+
+sintagma_verbal(negativo) --> verbo_negativo.
+sintagma_verbal(negativo) --> verbo_negativo, complemento.
+sintagma_verbal(negativo) --> pronombre_objeto, verbo_negativo.
+sintagma_verbal(negativo) --> pronombre_objeto, pronombre_objeto, verbo_neutro, adjetivo_negativo. % (ej: "se me hace dificil")
 
 
-% diccionario de palabras para el parser (con prioridad a lo negativo)
 
-% respuestas indirectas (con adjetivos o frases comunes que denotan gusto o disgusto)
-frase_indirecta_positiva --> [soy, de, esas, cosas] | [soy, asi] | [me, defiendo] | [puede, ser].
-frase_indirecta_positiva --> [interesante] | [suena, bien] | [me, llama, la, atencion] | [chiva].
+complemento --> determinante, sustantivo.
+complemento --> adjetivo.
+complemento --> adverbio.
+complemento --> pronombre.
+complemento --> preposicion, determinante, sustantivo.
+complemento --> preposicion, pronombre.
 
-frase_indirecta_negativa --> [son, aburridas] | [es, aburrido] | [se, me, hace, dificil] | [son, dificiles].
 
-% el pivot se encarga de marcar el inicio de una respuesta que indica un cambio de tema o preferencia, lo que implica un rechazo a la pregunta actual.
-pivot --> [soy, mas, de] | [prefiero] | [me, inclino, por].
 
-% afirmaciones y negaciones explícitas
 afirmacion --> [si] | [claro] | [obvio] | [exacto] | [correcto].
 negacion --> [no] | [nunca] | [jamas] | [tampoco].
 
-% Verbos Positivos (Con infinitivos)
-verbo_positivo --> [amo] | [amas] | [amamos] | [aman] | [amaba] | [amar].
-verbo_positivo --> [gusta] | [gustan] | [gustaba] | [gustaban] | [gustaria] | [gustar].
-verbo_positivo --> [encanta] | [encantan] | [encantaba] | [encantaria] | [encantar].
-verbo_positivo --> [disfruto] | [disfrutamos] | [apasiona] | [apasionan] | [disfrutar] | [apasionar].
-verbo_positivo --> [interesa] | [interesan] | [adoro] | [interesar] | [adorar].
+determinante --> [el] | [la] | [los] | [las] | [un] | [una] | [esas].
+sustantivo --> [cosas] | [juego] | [moto] | [anime] | [proyecto] | [idea] | [atencion].
 
-% Verbos Negativos (Con infinitivos)
-verbo_negativo --> [odio] | [odiamos] | [odian] | [odiaba] | [odiar].
-verbo_negativo --> [detesto] | [detestamos] | [detestan] | [detestar].
-verbo_negativo --> [desagrada] | [desagradan] | [aburre] | [aburren] | [desagradar] | [aburrir].
-verbo_negativo --> [tolero] | [soporto] | [aguanto] | [tolerar] | [soportar] | [aguantar].
+pronombre --> [yo] | [nosotros] | [el] | [ella] | [mi].
+pronombre_objeto --> [me] | [te] | [se] | [nos] | [lo] | [la].
+
+preposicion --> [de] | [por] | [en] | [a] | [con].
+adverbio --> [asi] | [bien] | [mas].
+
+adjetivo --> [interesante] | [chiva] | [genial].
+adjetivo_negativo --> [aburrido] | [dificil] | [aburridas] | [dificiles].
+
+verbo_positivo --> [amo] | [amas] | [amamos] | [aman] | [amaba].
+verbo_positivo --> [gusta] | [gustan] | [gustaba] | [gustaban] | [gustaria].
+verbo_positivo --> [encanta] | [encantan] | [encantaba] | [encantaria].
+verbo_positivo --> [disfruto] | [disfrutamos] | [apasiona] | [apasionan].
+verbo_positivo --> [interesa] | [interesan] | [adoro].
+% Agregados para suplir las frases indirectas sin romper la gramática:
+verbo_positivo --> [defiendo] | [suena] | [llama] | [soy] | [prefiero] | [inclino].
+
+verbo_negativo --> [odio] | [odiamos] | [odian] | [odiaba].
+verbo_negativo --> [detesto] | [detestamos] | [detestan].
+verbo_negativo --> [desagrada] | [desagradan] | [aburre] | [aburren].
+verbo_negativo --> [tolero] | [soporto] | [aguanto].
+
+verbo_neutro --> [hace].
+verbo_modal --> [puede].
+verbo_infinitivo --> [ser] | [amar] | [gustar] | [encantar] | [disfrutar] | [apasionar] | [interesar] | [adorar] | [odiar] | [detestar] | [desagradar] | [aburrir] | [tolerar] | [soportar] | [aguantar].
