@@ -167,3 +167,128 @@ antagonia(trabajo_social, trabajo_autonomo).
 antagonia(trabajo_social, matematicas).
 antagonia(trabajo_social, tecnologia).
 antagonia(trabajo_social, poca_empatia).
+
+
+%articulos definidos
+articulo(sing, masc,_,el).
+articulo(sing, fem,_,la).
+articulo(plur, masc,_,los).
+articulo(plur, fem,_,las).
+
+
+%articulos indefinidos
+articulo(sing, masc,_, un).
+articulo(sing, fem,_,una).
+articulo(plur, masc,_, unos).
+articulo(plur, fem,_,unas).
+
+%Adjetivos demostrativos
+adj_dem(sing,_,_,esto).
+adj_dem(sing,_,_,eso).
+adj_dem(sing,_,_,aquello).
+
+adj_dem(sing,masc,_,este).
+adj_dem(sing,masc,_,ese).
+adj_dem(sing,masc,_,aquel).
+
+adj_dem(sing,fem,_,esta).
+adj_dem(sing,fem,_,esa).
+adj_dem(sing,fem,_,aquella).
+
+adj_dem(plur,masc,_,estos).
+adj_dem(plur,masc,_,esos).
+adj_dem(plur,masc,_,aquello).
+
+adj_dem(plur,fem,_,estas).
+adj_dem(plur,fem,_,esas).
+adj_dem(plur,fem,_,aquellas).
+
+%Adjetivos posesivos
+adj_pos(sing,_,_,mi).
+adj_pos(sing,_,_,tu).
+adj_pos(sing,_,_,su).
+
+%pronombre
+pronombres(sing,_,primera,yo).
+pronombres(plur,_,primera,nosotros).
+pronombres(plur,_,primera,nosotras).
+pronombres(sing,_,segunda,tu).
+pronombres(sing,_,segunda,usted).
+pronombres(plur,_,segunda,ustedes).
+pronombres(sing,masc,tercera,el).
+pronombres(sing,fem,tercera,ella).
+pronombres(plur,masc,tercera,ellos).
+pronombres(plur,fem,tercera,ellas).
+
+%cuantificadores
+cuantificadores(sing, _,bastante).
+cuantificadores(plur, _,bastantes).
+cuantificadores(sing, _,cualquier).
+cuantificadores(plur, _,cualesquiera).
+
+cuantificadores(sing, masc,algun).
+cuantificadores(plur, masc,algunos).
+cuantificadores(sing, masc,mucho).
+cuantificadores(plur, masc,muchos).
+cuantificadores(sing, masc,demasiado).
+cuantificadores(plur, masc,demasiados).
+cuantificadores(sing, masc,poco).
+cuantificadores(plur, masc,pocos).
+cuantificadores(sing, masc,todo).
+cuantificadores(plur, masc,todos).
+cuantificadores(sing, masc,otro).
+cuantificadores(plur, masc,otros).
+
+cuantificadores(sing, fem,alguna).
+cuantificadores(plur, fem,algunas).
+cuantificadores(sing, fem,mucha).
+cuantificadores(plur, fem,muchas).
+cuantificadores(sing, fem,demasiada).
+cuantificadores(plur, fem,demasiadas).
+cuantificadores(sing, fem,poca).
+cuantificadores(plur, fem,pocas).
+cuantificadores(sing, fem,toda).
+cuantificadores(plur, fem,todas).
+cuantificadores(sing, fem,otra).
+cuantificadores(plur, fem,otras).
+
+%Intensificadores
+
+
+%sustantivos
+sustantivos(sing, masc, tercera,hombre).
+sustantivos(sing, fem, tercera,mujer).
+sustantivos(sing, fem, tercera,biologia).
+
+%Verbos
+verbos(sing,gustar).
+verbos(sing,gustaria).
+verbos(sing,gusta).
+verbos(sing,disfrutar).
+verbos(sing,disfrutaria).
+verbos(sing,disfruto).
+verbos(sing,encantar).
+verbos(sing,encantaria).
+verbos(sing,encanta).
+verbos(sing,odiar).
+verbos(sing,odiaria).
+verbos(sing,odio).
+verbos(sing,estudiar).
+verbos(sing,estudiaria).
+verbos(sing,estudio).
+verbos(sing,hablar).
+verbos(sing,hablaria).
+verbos(sing,hablo).
+verbos(sing,ser).
+verbos(sing,sere).
+verbos(sing,soy).
+
+%Preposiciones 
+preposicion(a).
+preposicion(en).
+preposicion(con).
+preposicion(de).
+preposicion(por).
+preposicion(para).
+
+
